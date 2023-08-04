@@ -17,3 +17,14 @@ poetry install
 make format
 ```
 
+```
+dokku apps:create unbosque-calendar-back
+
+# Setup database
+dokku postgres:create unbosque-calendar-db
+dokku postgres:link unbosque-calendar-db unbosque-calendar-back
+
+# Setup rabbitmq
+dokku rabbitmq:create unbosque-calendar-rabbitmq
+dokku rabbitmq:link unbosque-calendar-rabbitmq unbosque-calendar-back
+```

@@ -18,6 +18,7 @@ COPY --from=requirements-stage /tmp/requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r /app/requirements.txt
 
 ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONPATH=:/app/src
 
 CMD ["gunicorn", "unbosque_calendar.wsgi"]
