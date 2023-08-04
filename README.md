@@ -9,3 +9,11 @@ pip install -U pip setuptools
 pip install poetry==1.5.1
 poetry install
 ```
+
+
+### Format the code
+
+```sh
+make format
+```
+
