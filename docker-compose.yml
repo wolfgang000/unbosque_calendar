@@ -8,7 +8,29 @@ services:
     volumes:
       - ./:/home/user/app/
     ports:
-      - 8001:8001
+      - 8000:8000
 
+  db_dev:
+    image: "postgres:10.15-alpine"
+    environment:
+      POSTGRES_USER: test_user
+      POSTGRES_PASSWORD: test_password
+      POSTGRES_DB: postgres_dev
+    volumes:
+      - pgdata_dev:/var/lib/postgresql/data:rw
+    ports:
+      - 8004:5432
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "test_user", "-d", "postgres_dev"]
+      interval: 30s
+      timeout: 3s
+      retries: 30
+      start_period: 15s
 
+  message_broker_dev:
+    image: "rabbitmq:3.12.0-alpine"
+    ports:
+      - 8005:5672
 
+volumes:
+  pgdata_dev:

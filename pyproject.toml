@@ -9,6 +9,7 @@ packages = [{include = "unbosque_calendar"}]
 [tool.poetry.dependencies]
 python = "^3.11"
 django = "^4.2.4"
+celery = "^5.3.1"
 
 
 [tool.poetry.group.dev.dependencies]
