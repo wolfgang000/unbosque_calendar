@@ -1,7 +1,17 @@
 version: "3.8"
 
+x-env: &env
+  environment:
+    DATABASE_URL: postgres://test_user:test_password@db_dev:5432/postgres_dev
+    RABBITMQ_URL: pyamqp://guest@message_broker_dev//
+    SECRET_KEY: "bj4wa_n7usp9^sycla5(6k-!yd=s=%ze(log_)fkx5n3u+=b@g"
+  env_file:
+    - .env.local.dev
+
+
 services:
   backend:
+    <<: *env
     build:
       context: .
       dockerfile: Dockerfile.dev
