@@ -21,7 +21,7 @@ services:
       - 8000:8000
 
   db_dev:
-    image: "postgres:10.15-alpine"
+    image: "postgres:15.3-alpine"
     environment:
       POSTGRES_USER: test_user
       POSTGRES_PASSWORD: test_password
