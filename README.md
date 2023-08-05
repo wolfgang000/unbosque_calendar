@@ -17,14 +17,41 @@ poetry install
 make format
 ```
 
+
+
+# Deployment
+
+## Setup server
+
 ```
-dokku apps:create unbosque-calendar-back
+dokku apps:create unbosque-calendar
+dokku config:set unbosque-calendar \
+  # Set the variables from .env.example.prod
 
 # Setup database
 dokku postgres:create unbosque-calendar-db
-dokku postgres:link unbosque-calendar-db unbosque-calendar-back
+dokku postgres:link unbosque-calendar-db unbosque-calendar
 
 # Setup rabbitmq
 dokku rabbitmq:create unbosque-calendar-rabbitmq
-dokku rabbitmq:link unbosque-calendar-rabbitmq unbosque-calendar-back
+dokku rabbitmq:link unbosque-calendar-rabbitmq unbosque-calendar
+
+# Setup SSL certificate
+# Remember to open the 443 port
+
+dokku letsencrypt:set unbosque-calendar email test@mail.com
+dokku letsencrypt:enable unbosque-calendar
+
+dokku letsencrypt:cron-job --add
+
+# Setup domain
+dokku domains:set unbosque-calendar unbosque-calendar.example.com
+```
+
+## Deploy and push changes
+
+```
+git remote add server dokku@example.com:unbosque-calendar
+
+git push server
 ```
