@@ -6,6 +6,7 @@ x-env: &env
     RABBITMQ_URL: pyamqp://guest@message_broker_dev//
     SECRET_KEY: "bj4wa_n7usp9^sycla5(6k-!yd=s=%ze(log_)fkx5n3u+=b@g"
     DJANGO_HOST: "localhost"
+    DEBUG: "true"
   env_file:
     - .env.local.dev
 

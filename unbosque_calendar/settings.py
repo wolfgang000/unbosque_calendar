@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 import dj_database_url
 from pathlib import Path
-
+from distutils.util import strtobool 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +26,7 @@ DJANGO_HOST = os.environ["DJANGO_HOST"]
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(strtobool(os.environ['DEBUG']))
 
 ALLOWED_HOSTS = [DJANGO_HOST]
 

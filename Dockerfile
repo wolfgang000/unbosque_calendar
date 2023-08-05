@@ -20,5 +20,6 @@ RUN pip install --no-cache-dir -r /app/requirements.txt
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONPATH=:/app/src
+ENV DEBUG false
 
 CMD ["gunicorn", "unbosque_calendar.wsgi"]
