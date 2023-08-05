@@ -21,7 +21,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ["SECRET_KEY"]
 DJANGO_HOST = os.environ["DJANGO_HOST"]
 
@@ -126,3 +125,7 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+GOOGLE_CLIENT_ID = os.environ["GOOGLE_CLIENT_ID"]
+GOOGLE_CLIENT_SECRET = os.environ["GOOGLE_CLIENT_SECRET"]
+GOOGLE_REDIRECT_URI = os.environ["GOOGLE_REDIRECT_URI"]

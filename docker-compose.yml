@@ -5,6 +5,7 @@ x-env: &env
     DATABASE_URL: postgres://test_user:test_password@db_dev:5432/postgres_dev
     RABBITMQ_URL: pyamqp://guest@message_broker_dev//
     SECRET_KEY: "bj4wa_n7usp9^sycla5(6k-!yd=s=%ze(log_)fkx5n3u+=b@g"
+    DJANGO_HOST: "localhost"
   env_file:
     - .env.local.dev
 
