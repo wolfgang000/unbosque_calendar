@@ -55,3 +55,32 @@ git remote add server dokku@example.com:unbosque-calendar
 
 git push server
 ```
+
+# Production debugging
+
+## Enter to the container
+
+```
+dokku enter unbosque-calendar web /bin/sh
+```
+
+
+## Open a remote python shell
+
+```
+dokku enter unbosque-calendar web python manage.py shell
+```
+
+
+## Show logs
+
+```
+dokku logs unbosque-calendar
+```
+
+## Open a psql terminal
+
+```
+dokku postgres:connect unbosque-calendar-db
+```
+
