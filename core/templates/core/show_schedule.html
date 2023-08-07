@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<ul>
+{% for event in assignments %}
+    <li>
+        {{ event }}
+    </li>
+{% endfor %}
+</ul>
+
+<form action="/subscribe_schedule_to_calendar/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+
+{% endblock %}

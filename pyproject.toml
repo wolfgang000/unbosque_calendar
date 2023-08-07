@@ -17,6 +17,7 @@ gunicorn = "^21.2.0"
 oauthlib = "^3.2.2"
 httpx = "^0.24.1"
 result = "^0.13.1"
+beautifulsoup4 = "^4.12.2"
 
 
 [tool.poetry.group.dev.dependencies]
