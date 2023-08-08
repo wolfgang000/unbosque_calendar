@@ -7,6 +7,7 @@ import httpx
 from oauthlib.oauth2 import WebApplicationClient
 from result import Err, Ok, Result
 from django.conf import settings
+from core import models
 from core.forms import FetchScheduleForm, SubscribeScheduleToCalendarForm
 
 
@@ -66,7 +67,7 @@ client = GoogleOAuth(
 
 
 def get_authorization_url(request):
-    redirect_url = client.get_authorization_url()
+    redirect_url = client.get_authorization_url("s")
     return HttpResponseRedirect(redirect_url)
 
 
@@ -81,6 +82,7 @@ def unable_to_subscribe(request):
 def google_callback(request):
     if request.method == "GET":
         code = request.GET.get("code")
+        state = request.GET.get("state")
         fetch_token_result = client.fetch_token(code)
 
         if isinstance(fetch_token_result, Err):
@@ -89,6 +91,12 @@ def google_callback(request):
         token = fetch_token_result.unwrap()
         access_token = token["access_token"]
         refresh_token = token["refresh_token"]
+
+        user = models.User(
+            email="test@mail.com", doc_id="123", refresh_token=refresh_token
+        )
+        user.save()
+
         return HttpResponseRedirect(reverse("successfully_subscribed"))
 
 

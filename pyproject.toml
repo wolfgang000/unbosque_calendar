@@ -18,6 +18,7 @@ oauthlib = "^3.2.2"
 httpx = "^0.24.1"
 result = "^0.13.1"
 beautifulsoup4 = "^4.12.2"
+google-api-python-client = "^2.96.0"
 
 
 [tool.poetry.group.dev.dependencies]
