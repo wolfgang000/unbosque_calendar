@@ -11,4 +11,9 @@ urlpatterns = [
         views.subscribe_schedule_to_calendar,
         name="subscribe_schedule_to_calendar",
     ),
+    path(
+        "successfully_subscribed/",
+        views.successfully_subscribed,
+        name="successfully_subscribed",
+    ),
 ]

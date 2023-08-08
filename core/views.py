@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.urls import reverse
 from httpx import Client
 import httpx
 from oauthlib.oauth2 import WebApplicationClient
@@ -69,17 +70,26 @@ def get_authorization_url(request):
     return HttpResponseRedirect(redirect_url)
 
 
+def successfully_subscribed(request):
+    return render(request, "core/successfully_subscribed.html")
+
+
+def unable_to_subscribe(request):
+    return render(request, "core/successfully_subscribed.html")
+
+
 def google_callback(request):
-    code = request.GET.get("code")
-    fetch_token_result = client.fetch_token(code)
+    if request.method == "GET":
+        code = request.GET.get("code")
+        fetch_token_result = client.fetch_token(code)
 
-    if isinstance(fetch_token_result, Err):
-        return
+        if isinstance(fetch_token_result, Err):
+            return
 
-    token = fetch_token_result.unwrap()
-    access_token = token["access_token"]
-    refresh_token = token["refresh_token"]
-    return HttpResponseRedirect("")
+        token = fetch_token_result.unwrap()
+        access_token = token["access_token"]
+        refresh_token = token["refresh_token"]
+        return HttpResponseRedirect(reverse("successfully_subscribed"))
 
 
 SEMESTER_END_DATE = "20231220T160000Z"
