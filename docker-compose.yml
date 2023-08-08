@@ -22,6 +22,26 @@ services:
     ports:
       - 8000:8000
 
+  celery_worker:
+    <<: *env
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./:/home/user/app/
+    command: >
+      sh -c "python -m celery -A unbosque_calendar worker -l INFO -E"
+
+  celery_beat:
+    <<: *env
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./:/home/user/app/
+    command: >
+      sh -c "python -m celery -A unbosque_calendar beat"
+
   db_dev:
     image: "postgres:15.3-alpine"
     environment:
